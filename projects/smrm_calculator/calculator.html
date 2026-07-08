@@ -1,0 +1,199 @@
+  <script>
+      $('[data-bs-toggle="popover"]').popover();  
+      
+        const inputRiskPercentageRange = document.getElementById("riskPercentageRange");
+       
+        inputRiskPercentageRange.oninput = function(){
+
+        selectedRiskPercentage = parseFloat(this.value);
+
+        const riskPercentageLabel = document.getElementById("riskPercentageLabel");
+
+        riskPercentageLabel.textContent = this.value+"%";
+
+        capital = parseFloat(document.getElementById("inputCapital").value);
+  
+        if (isNaN(capital) || capital <= 0) {
+              return;
+        }
+
+        riskAmount = (capital*(selectedRiskPercentage/100)).toFixed(2);
+        document.getElementById("riskAmount").innerText = `₹${riskAmount}`;
+
+      }
+    </script>
+
+    <!-- ### START OF CALCULATOR INPUT CONTAINER #### -->
+    <div class="container pt-1">
+
+        <!-- Start of Form for User Input -->
+        <!-- Capital Input -->
+        <div class="row mb-3">
+            <label for="inputCapital" class="col-4 col-form-label" data-bs-toggle="tooltip" data-bs-title="Default tooltip">
+              Capital (₹)
+              <button type="button" class="btn btn-link" data-bs-toggle="popover" title="Capital (₹)" data-bs-content="The total capital you are willing to invest.">
+                <img src="/assets/images/info_circle.svg" class="pb-1"/>
+              </button>
+            </label>
+            <div class="col-8">
+                <input type="number" class="form-control" id="inputCapital" oninput="convertToWords()" placeholder="Enter Capital"/>
+                <div id="capitalInWords"></div>
+                <div id="capitalError" class="invalid-feedback d-block"></div>
+            </div>
+        </div>
+
+        <!-- Risk on Capital Input -->
+        <div class="row mb-3">
+          <div class="col-4">
+            Risk on Capital (%)
+            <button type="button" class="btn btn-link" data-bs-toggle="popover" title="Risk on Capital (%)" data-bs-content="The percentage of total capital that you are willing to risk on the trade.">
+              <img src="/assets/images/info_circle.svg" class="pb-1"/>
+            </button>
+          </div>
+          <div class="col-8">
+              <ul class="list-group list-group-horizontal">
+                <li class="list-group-item text-bg-light ps-4 col-6 text-center" id="riskPercentageLabel">3%</li>
+                <li class="list-group-item text-bg-light ps-4 col-6 text-center" id="riskAmount"></li>
+              </ul>
+              <input type="range" class="form-range mt-4 mb-3" min="0.1" max="5" step="0.1" value="3" id="riskPercentageRange">
+          </div>
+        </div>
+
+
+        <!-- Entery Price Input -->
+        <div class="row mb-3">
+            <label for="inputEntryPrice" class="col-4 col-form-label">
+              Entry Price (₹)
+              <button type="button" class="btn btn-link" data-bs-toggle="popover" title="Entry Price (₹)" data-bs-content="The price at which you plan to enter or initiate the trade by purchasing the stock.">
+                <img src="/assets/images/info_circle.svg" class="pb-1"/>
+              </button>
+            </label>
+            <div class="col-8">
+                <input type="number" class="form-control" id="inputEntryPrice" placeholder="Enter Entry Price" />
+                <div id="entryPriceError" class="invalid-feedback d-block"></div>
+            </div>
+        </div>
+
+        <!-- Target (TGT) Price Input -->
+        <div class="row mb-3">
+            <label for="inputTargetPrice" class="col-4 col-form-label">
+              Target (TGT) Price (₹)
+              <button type="button" class="btn btn-link" data-bs-toggle="popover" title="Target (TGT) Price (₹)" data-bs-content="The target price is the price level at which you aim to sell the stock to realize a profit.">
+                <img src="/assets/images/info_circle.svg" class="pb-1"/>
+              </button>
+            </label>
+            <div class="col-8">
+                <input type="number" class="form-control" id="inputTargetPrice" placeholder="Enter Target Price" />
+                <div id="targetPriceError" class="invalid-feedback d-block"></div>
+            </div>
+        </div>
+
+        <!-- Stop-Loss (SL) Price Input -->
+        <div class="row mb-3">
+            <label for="inputStopLossPrice" class="col-4 col-form-label">
+              Stop-Loss (SL) Price (₹)
+              <button type="button" class="btn btn-link" data-bs-toggle="popover" title="Stop-Loss (SL) Price (₹)" data-bs-content="The stop-loss price is the predefined price level at which you intend to sell the stock to limit potential losses.">
+                <img src="/assets/images/info_circle.svg" class="pb-1"/>
+              </button>
+            </label>
+            <div class="col-8">
+                <input type="number" class="form-control" id="inputStopLossPrice" placeholder="Enter Stop-Loss Price" />
+                <div id="stopLossPriceError" class="invalid-feedback d-block"></div>
+            </div>
+        </div>
+  
+        <!-- Stop-Loss (SL) Price Input -->
+        <div class="row mb-3">
+            <div class="col-4 col-form-label"></div>
+            <div class="col-8">
+                <button onclick="calculate()" class="btn btn-primary" id="btn-calculate">Calculate</button>
+            </div>
+        </div>
+      <!-- End of Form for User Input -->
+
+    </div>
+    <!-- ### END OF CALCULATOR INPUT CONTAINER #### -->
+
+
+    <!-- ### START OF CALCULATOR OUTPUT CONTAINER #### -->
+    <div class="container pt-1">
+      <table class="table table-bordered table-responsive table-hover mt-3 ps-5">
+        <thead class="table-primary">
+          <tr>
+            <th class="column1" scope="col">Parameter</th>
+            <th class="column2" scope="col">Value</th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+          <tr>
+            <td class="column1">
+              Rec. Quantity to Buy
+              <button type="button" class="btn btn-link" data-bs-toggle="popover" title="Recommended Quantity to Buy" data-bs-content="The calculated quantity of shares that you can buy considering your capital, risk tolerance (risk percentage), and stock prices (entry and stop-loss).">
+                <img src="/assets/images/info_circle.svg" class="pb-1"/>
+              </button>
+            </td>
+            <td class="column2 fw-bold" id="stockQuantity"></td>
+          </tr>
+          <tr>
+            <td class="column1">
+              Capital Required
+              <button type="button" class="btn btn-link" data-bs-toggle="popover" title="Capital Required" data-bs-content="The total capital required to execute the recommended stock quantity purchase.">
+                <img src="/assets/images/info_circle.svg" class="pb-1"/>
+              </button>
+            </td>
+            <td class="column2">
+              <span class="fw-bold" id="outputCapitalRequired"></span>
+              &nbsp;&nbsp;
+              <span id="outputCapitalRequiredPercentage" class="badge text-bg-info"></span>
+            </td>
+          </tr>
+          <tr>
+            <td class="column1">
+              Risk/Reward Ratio
+              <button type="button" class="btn btn-link" data-bs-toggle="popover" title="Risk/Reward Ratio" data-bs-content="Represented as 1:X, compares the estimated potential profit (if the price reaches your target) versus the potential loss (if it falls to your stop-loss).">
+                <img src="/assets/images/info_circle.svg" class="pb-1"/>
+              </button>
+            </td>
+            <td class="column2 fw-bold">
+              <div class="hstack">
+                <div id="outputRiskRatio"></div>
+                <div id="outputRewardRatio"></div>
+              </div>
+            </td>
+          </tr>
+          <tr class="table-success">
+            <td class="column1">
+              Potential Profit (On TGT)
+              <button type="button" class="btn btn-link" data-bs-toggle="popover" title="Potential Profit (On TGT)" data-bs-content="The estimated profit you could earn if the stock price reaches your target.">
+                <img src="/assets/images/info_circle.svg" class="pb-1"/>
+              </button>
+            </td>
+            <td class="column2">
+              <span id="outputPotentialProfitOnTarget"></span>
+              &nbsp;&nbsp;
+              <span id="outputPotentialProfitOnTargetPercentage" class="badge text-bg-success"></span>
+              &nbsp;&nbsp;
+              <span id="outputPotentialProfitPerShare"></span>
+            </td>
+          </tr>
+          <tr class="table-danger">
+            <td class="column1">
+              Potential Loss (On SL)
+              <button type="button" class="btn btn-link" data-bs-toggle="popover" title="Potential Loss (On SL)" data-bs-content="The estimated loss you could incur if the stock price falls to your stop-loss.">
+                <img src="/assets/images/info_circle.svg" class="pb-1"/>
+              </button>
+            </td>
+            <td class="column2">
+              <span id="outputPotentialLossOnStopLoss"></span>
+              &nbsp;&nbsp;
+              <span id="outputPotentialLossOnStopLossPercentage" class="badge text-bg-danger"></span>
+              &nbsp;&nbsp;
+              <span id="outputPotentialLossPerShare"></span>
+              
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="fw-light fst-italic text-end"><small>Please visit the <strong>'About'</strong> section for detailed usage instructions and information.</small></p>
+    </div>
+    <!-- ### END OF CALCULATOR OUTPUT CONTAINER #### -->

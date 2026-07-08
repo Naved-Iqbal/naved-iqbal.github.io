@@ -1,0 +1,180 @@
+<script async src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<div class="container pt-3 ps-2">
+    <div class="row">
+      <div class="col">
+        <h4 class="display-4">About</h4>
+        <p class="lead mb-5">The Stock Market Risk Management Calculator is a powerful tool designed to help investors manage their portfolio risk effectively. Whether you are a beginner or an experienced trader, this calculator can assist you in making informed decisions to safeguard your investments.</p>
+        
+        <h6 class="display-6">Input</h6>
+        <p class="lead">The calculator takes the following inputs from user:</p>
+        <ul class="fw-normal mb-5">
+            <li class="m-3"><strong>Capital (₹):</strong>
+                <ul>
+                    <li>The total amount of money that you intends to invest or allocate to the trade.</li>
+                    <li>Must be between ₹1 and ₹100,000,000</li>
+                </ul>
+            </li>
+            <li class="m-3"><strong>Risk on Capital (%):</strong>
+                <ul>
+                    <li>The percentage of total capital that you are willing to risk on the trade. </li>
+                    <li>It reflects your risk tolerance and impacts the number of shares you can buy, influencing potential profit and loss.</li>
+                </ul>
+            </li>
+            <li class="m-3"><strong>Entry Price (₹):</strong>
+                <ul>
+                    <li>The price at which you plan to enter or initiate the trade by purchasing the stock.</li>
+                    <li>It's typically the current market price or the price at which you intends to execute the buy order.</li>
+                </ul>
+            </li>
+            <li class="m-3"><strong>Target (TGT) Price (₹):</strong>
+                <ul>
+                    <li>The target price is the price level at which you aim to sell the stock to realize a profit.</li>
+                </ul>
+            </li>
+
+            
+            <li class="m-3"><strong>Stop-Loss (SL) Price (₹):</strong>
+                <ul>
+                    <li>The stop-loss price is the predefined price level at which you intend to sell the stock to limit potential losses.</li>
+                    <li>It serves as a protective measure to exit the trade if the stock price moves unfavorably beyond a certain threshold.</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h6 class="display-6">Output</h6>
+        <p class="lead">The calculator provides the following information:</p>
+        <ul class="fw-normal mb-5">
+            <li class="m-3"><strong>Buy Quantity:</strong>
+                <ul>
+                    <li>The calculated quantity of shares that you can buy considering your capital, risk tolerance (risk percentage), and stock prices (entry and stop-loss).</li>
+                    <li>It indicates the investment size based on your risk preferences.</li>
+                    
+                </ul>
+            </li>
+
+            <li class="m-3"><strong>Capital Required:</strong>
+                <ul>
+                    <li>The total capital required to execute the recommended stock quantity purchase.</li>                        
+                </ul>
+            </li>
+
+            <li class="m-3"><strong>Risk-Reward Ratio:</strong>
+                <ul>
+                    <li>Represented as <em>1:X</em>, compares the estimated potential profit (if the price reaches your target) versus the potential loss (if it falls to your stop-loss).</li>
+                    <li>It helps assess the trade-off between potential gain and potential risk.</li>                       
+                </ul>
+            </li>
+
+            <li class="m-3"><strong>Potential Profit:</strong>
+                <ul>
+                    <li>The estimated profit you could earn if the stock price reaches your target.</li>
+                    <li>It shows the best-case scenario based on your assumptions and helps evaluate potential upside.</li>                       
+                </ul>
+            </li>
+
+            <li class="m-3"><strong>Potential Loss:</strong>
+                <ul>
+                    <li>The estimated loss you could incur if the stock price falls to your stop-loss. </li>
+                    <li>It highlights the worst-case scenario based on your risk management and emphasizes the potential downside.</li>                       
+                </ul>
+            </li>
+        </ul>
+
+        <h6 class="display-6">How It Works</h6>
+        <p class="lead">The calculator uses your input values such as capital, entry price, target price, and stop-loss price to calculate essential risk management metrics such as quantity to buy, capital required, risk-reward ratio, potential profit, and potential loss.</p>
+
+        <p class="fw-normal"><strong>Example: </strong> Suppose you have a capital of ₹10,000 and you want to invest it in a stock with an entry price of ₹100, a target price of ₹110, and a stop-loss price of ₹95. Below are the calculations which calculator perform:</p>
+
+        <div class="container ms-0 ps-0">
+            <div class="card container ps-1 mt-5 mb-5">
+                <div class="card-header ps-0">Input</div>
+                <div class="card-body ps-1">
+                    <div class="container d-flex ps-0">$$ \small{ Capital = \text{₹}10000 } $$</div>
+                    <div class="container d-flex ps-0"> $$ \small{ Risk\;Percentage = 3\text{%} \;\;\;(i.e. 0.03) } $$ </div>
+                    <div class="container d-flex ps-0"> $$ \small{ Entry\;Price = \text{₹}100 } $$ </div>
+                    <div class="container d-flex ps-0"> $$ \small{ Target\;Price = \text{₹}110 } $$ </div>
+                    <div class="container d-flex ps-0"> $$ \small{ Stop\;Loss\;Price = \text{₹}95 } $$ </div>
+                </div>
+              </div>
+
+              <div class="card container ps-1">
+                <div class="card-header ps-0">Calculations</div>
+                <div class="card-body ps-1">
+
+                    <div class="container d-flex ps-0">
+                        $$ \small{ Risk\;on\;Capital = Capital \times Risk\;Percentage } $$
+                    </div>
+                    <div class="container d-flex ps-0">
+                        $$ \small{ Risk\;on\;Capital = 10000 \times 0.03 = \text{₹}300 } $$
+                    </div>
+
+                    <hr class="hr">
+
+                    <div class="container d-flex ps-0">
+                        $$ \small{ Buy\;Quantity = \frac{Risk\;on\;Capital}{Entry\;Price - Stop\;Loss\;Price} } $$
+                    </div>
+                    <div class="container d-flex ps-0">
+                        $$ \small{ Buy\;Quantity = \frac{300}{100 - 95} = \frac{300}{5} = 60 } $$
+                    </div>
+
+                    <hr class="hr">
+
+
+                    <div class="container  d-flex ps-0">
+                        $$ \small{ Capital\;Required = Buy\;Quantity \times Entry\;Price } $$
+                    </div>
+                    <div class="container  d-flex ps-0">
+                        $$ \small{ Capital\;Required = 60 \times 100 = \text{₹}6000 } $$
+                    </div>
+
+                    <hr class="hr">
+
+                    <div class="container  d-flex ps-0">
+                        $$ \small{ Risk\;Reward\;Ratio = \frac{Target\;Price - Entry\;Price}{Entry\;Price - Stop\;Loss\;Price} } $$
+                    </div>
+                    <div class="container  d-flex ps-0">
+                        $$ \small{ Risk\;Reward\;Ratio = \frac{110 - 100}{100 - 95} = \frac{10}{5} = 2 \;\;(i.e. 1:2) } $$
+                    </div>
+
+                    <hr class="hr">
+
+                    <div class="container  d-flex ps-0">
+                        $$ \small{ Potential\;Profit = Buy\;Quantity \times (Target\;Price - Entry\;Price) } $$
+                    </div>
+                    <div class="container  d-flex ps-0">
+                        $$ \small{ Potential\;Profit = 60 \times (110 - 100) = 60 \times 10 = \text{₹}600 } $$
+                    </div>
+
+                    <hr class="hr">
+
+                    <div class="container  d-flex ps-0">
+                        $$ \small{ Potential\;Loss = Buy\;Quantity \times (Entry\;Price - Stop\;Loss\;Price) } $$
+                    </div>
+                    <div class="container  d-flex ps-0">
+                        $$ \small{ Potential\;Loss = 60 \times (100 - 95) = 60 \times 5 = \text{₹}300 } $$
+                    </div>
+
+                </div>
+              </div>
+        </div>
+
+        <div class="alert alert-warning mt-5">
+          <p><strong>Remember:</strong>
+            <li>It's crucial to do your own research, understand the specific investment, and consult a financial advisor before making any investment decisions.</li>
+            <li>Your risk tolerance depends on various factors like your financial situation, age, investment goals, and risk appetite.</li>
+            <li>Diversification across different assets can help manage overall risk.</li>
+            </p>
+        </div>
+
+        <hr class="hr  mt-5">
+        <div class="container">
+            <p class="fs-3 fw-semibold">Developer Information</p>
+            <p>This tool has been developed by Naved Iqbal. If you have any questions or feedback, you can reach out to Naved at <a href="mailto:navediqbal5@gmail.com?subject=Feedback: Stock Market Risk Management Calculator&body=Hi, We'd love to hear your feedback.">navediqbal5@gmail.com</a></p>
+        
+            <p>Enjoy using the Stock Market Risk Management Calculator for informed trading decisions!</p>
+
+      </div>
+    </div>
+</div>
